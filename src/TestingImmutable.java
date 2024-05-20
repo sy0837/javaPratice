@@ -10,6 +10,8 @@ public final class TestingImmutable extends ThreadBuffer {
         return -1;
     }
 
+
+
     @Override
     void getValue(){
 
