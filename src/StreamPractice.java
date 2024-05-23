@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class StreamPractice {
+public class StreamPractice extends Thread{
     List<Student> list = Arrays.asList(
             new Student(1, "Rohit", "Mall", 30, "Male", "Mechanical Engineering", 2015, "Mumbai", 122),
             new Student(2, "Pulkit", "Singh", 56, "Male", "Computer Engineering", 2018, "Delhi", 67),
@@ -19,7 +19,15 @@ public class StreamPractice {
 
 
     synchronized public List<String> withName(String  a){
-        return list.stream().map(Student::getFirstName).filter(firstName -> firstName.contains(a)).collect(Collectors.toList());
+        return list.stream().map(student -> student.getFirstName().toLowerCase()).filter(firstName -> firstName.contains(a)).collect(Collectors.toList());
+    }
+
+    public void compareString(){
+        Optional<String> s1= list.stream().map(Student::getDepartmantName).max((s, t1) -> t1.compareTo(s));
+        if(s1.isPresent()){
+            System.out.println(s1);
+        }
+
     }
 
     synchronized public Map withDepartment(){
@@ -73,7 +81,12 @@ public class StreamPractice {
 
     synchronized public Student findSecondRank(){
 
-        Optional<String> s = list.stream().map(Student::getDepartmantName).max(Comparator.comparing(String::length));
+
+//        list.stream().collect(Collectors.groupingBy(Student::getDepartmantName, Collectors.counting())).entrySet().stream().max(Comparator.comparing().reversed());
+
+        String s=list.stream().max(Comparator.comparing(student -> student.getFirstName())).get().getFirstName();
+
+        Optional<String> s1 = list.stream().map(Student::getDepartmantName).max(Comparator.comparing(String::length));
         return list.stream().sorted(Comparator.comparing(Student::getRank)).skip(1).findFirst().orElseThrow();
     }
 

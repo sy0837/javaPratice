@@ -1,7 +1,7 @@
 @FunctionalInterface
-public interface Functional {
+public interface Functional extends ParentFunctional {
     void run();
-    default int check(int s){
+    default int  check(int s){
         if(s== 2)
             return 0;
         return 1;

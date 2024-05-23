@@ -1,12 +1,11 @@
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.SynchronousQueue;
 
-public class ThreadBuffer implements Runnable {
+public class ThreadBuffer implements Runnable{
 
      private Queue<String> queue= new PriorityQueue<>();
 
-    synchronized void addValue()  {
+     synchronized void addValue()  {
         try {
 
             System.out.println(Thread.currentThread().getName());
@@ -44,8 +43,34 @@ public class ThreadBuffer implements Runnable {
         }
     }
 
+    void checkNew(){
+         System.out.println("");
+    }
+
+    static void running(){
+
+         System.out.println("Overide main Running");
+    }
+
     @Override
     public void run() {
-        System.out.println("Run method Runnig");
+         return;
     }
+
+/*
+    public static void main(String args[]){
+         running();
+    }
+*/
+
+/*
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }*/
+
+/*    @Override
+    public void run() {
+        System.out.println("Run method Running");
+    }*/
 }
